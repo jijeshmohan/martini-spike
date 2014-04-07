@@ -13,10 +13,11 @@ func InitRoutes(m *martini.ClassicMartini) {
 	m.Get("/", ListBlogs)
 	m.Get("/new", NewBlog)
 	m.Post("/new", binding.Form(models.Post{}), CreateBlog)
-	m.Get("/:id", ShowBlog)
+	m.Get("/post/:id", ShowBlog)
 
 	m.NotFound(func(r render.Render) {
-		r.HTML(404, "staus/404", "")
+		fmt.Println("....................................................")
+		r.HTML(404, "status/404", "")
 	})
 }
 

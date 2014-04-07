@@ -20,6 +20,7 @@ func init() {
 		Layout: "layout",
 	}))
 	m.Use(middleware.InitContext())
+
 	if _, err := models.InitDb(); err != nil {
 		log.Fatalln("Unable to initialize database")
 	}
