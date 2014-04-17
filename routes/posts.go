@@ -17,7 +17,6 @@ func GetPosts(enc Encoder, db gorp.SqlExecutor) (int, string) {
 		checkErr(err, "select failed")
 		return http.StatusInternalServerError, ""
 	}
-	// return http.StatusOK, Must(enc.Encode(postsToIface(posts)...))
 	return http.StatusOK, Must(enc.EncodeOne(posts))
 }
 
@@ -77,15 +76,4 @@ func DeletePost(db gorp.SqlExecutor, parms martini.Params) (int, string) {
 		return http.StatusConflict, ""
 	}
 	return http.StatusNoContent, ""
-}
-
-func postsToIface(v []models.Post) []interface{} {
-	if len(v) == 0 {
-		return nil
-	}
-	ifs := make([]interface{}, len(v))
-	for i, v := range v {
-		ifs[i] = v
-	}
-	return ifs
 }
