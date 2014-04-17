@@ -1,0 +1,43 @@
+{
+	"baseName": "myapp",
+	"entities": [
+		{
+			"name": "post",
+			"attrs": [
+				{
+					"attrName": "title",
+					"attrType": "String",
+					"attrImplType": "string",
+					"minLength": "5",
+					"maxLength": "255",
+					"enumValues": [],
+					"required": true
+				},
+				{
+					"attrName": "body",
+					"attrType": "String",
+					"attrImplType": "string",
+					"minLength": "",
+					"maxLength": "",
+					"enumValues": [],
+					"required": false
+				}
+			]
+		},
+		{
+			"name": "comment",
+			"attrs": [
+				{
+					"attrName": "text",
+					"attrType": "String",
+					"attrImplType": "string",
+					"minLength": "",
+					"maxLength": "",
+					"enumValues": [],
+					"required": true
+				}
+			]
+		}
+	],
+	"resources": []
+}
