@@ -2,61 +2,10 @@
 
     <h2>Posts</h2>
 
-    <script type = "text/ng-template" id="post-save.html">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form name="form" role="form" novalidate
-                      class="ng-scope ng-invalid ng-invalid-required ng-dirty"
-                      ng-submit="ok()">
 
-                    <div class="modal-header">
-                        <button type="button" class="close"
-                                ng-click="cancel()">&times;</button>
-                        <h4 class="modal-title" id="myPostLabel">Create or edit a Post</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>ID</label>
-                            <input type="text" class="form-control" name="id"
-                                   ng-model="post.id" readonly>
-                        </div>
-
-                        
-                        <div class="form-group">
-                            <label>title:</label>
-                            
-                            <input type="text" class="form-control" name="title"
-                                   ng-model="post.title" ng-required="true"
-                                   ng-minlength=5 ng-maxlength=255/>
-                            <span class="error" ng-show="form.title.$error.minlength">Must be at least 5 characters.</span>
-                            <span class="error" ng-show="form.title.$error.maxlength">Must be at most 255 characters.</span>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>body:</label>
-                            
-                            <input type="text" class="form-control" name="body"
-                                   ng-model="post.body" ng-required="false"
-                                   />
-                            <span class="error" ng-show="form.body.$error.minlength">Must be at least  characters.</span>
-                            <span class="error" ng-show="form.body.$error.maxlength">Must be at most  characters.</span>
-                        </div>
-                        
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" ng-click="cancel()">Cancel
-                        </button>
-                        <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Save</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </script>
-
-    <button class="btn btn-primary btn-lg" ng-click="create()">
+    <a class="btn btn-primary btn-lg" href="/#/posts/new">
         <span class="glyphicon glyphicon-flash"></span> Create a new Post
-    </button>
+    </a>
 
     <div class="table-responsive">
         <table class="table table-striped">
@@ -76,9 +25,9 @@
                 
                 <td>{{post.title }}</td>
                 
-                <td>{{post.body }}</td>
+                <td ><div ng-bind-html="to_trusted(post.body)"></div></td>
                
-                <td> <markdown>{{post.body }}<markdown> </td>
+                <td> <markdown model="post"></markdown></td>
                 
                 <td>
                     <button type="submit"

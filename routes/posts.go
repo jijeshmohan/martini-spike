@@ -8,6 +8,7 @@ import (
 	"../models"
 	"github.com/coopernurse/gorp"
 	"github.com/go-martini/martini"
+	"github.com/martini-contrib/binding"
 )
 
 func GetPosts(enc Encoder, db gorp.SqlExecutor) (int, string) {
@@ -32,7 +33,11 @@ func GetPost(enc Encoder, db gorp.SqlExecutor, parms martini.Params) (int, strin
 	return http.StatusOK, Must(enc.EncodeOne(entity))
 }
 
-func AddPost(entity models.Post, w http.ResponseWriter, enc Encoder, db gorp.SqlExecutor) (int, string) {
+func AddPost(entity models.Post, w http.ResponseWriter, e binding.Errors, enc Encoder, db gorp.SqlExecutor) (int, string) {
+	if e.Count() > 0 {
+		fmt.Println(enc.EncodeOne(e))
+		return http.StatusBadRequest, ""
+	}
 	err := db.Insert(&entity)
 	if err != nil {
 		checkErr(err, "insert failed")

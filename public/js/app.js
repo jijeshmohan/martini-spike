@@ -27,12 +27,18 @@ angular.module('myapp', ['ngResource', 'ngRoute', 'ui.bootstrap', 'ui.date'])
   }]) 
   .directive('markdown', function ($http) {
     var converter = new Showdown.converter();
+      
     return {
-      restrict: 'AE',
-       transclude: true,
-      link: function(scope,element,attrs){
-      	 var html = converter.makeHtml(element.text());
-         element.html(html);
-      }
+      restrict: 'E',
+      require: 'model',
+      scope: {
+         post: '=model'
+      },
+      template:  '<div>{{post.body | markdown}}</div>'
     };
-  });
+  }).filter('markdown', function () {
+    var converter = new Showdown.converter();
+    return function (value) {
+        return converter.makeHtml(value || '');
+    };
+});

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('myapp')
-  .controller('PostController', ['$scope', '$modal', 'resolvedPost', 'Post',
-    function ($scope, $modal, resolvedPost, Post) {
+  .controller('PostController', ['$scope', '$modal', 'resolvedPost', 'Post','$sce',
+    function ($scope, $modal, resolvedPost, Post,$sce) {
 
       $scope.posts = resolvedPost;
 
@@ -49,7 +49,10 @@ angular.module('myapp')
           "id": ""
         };
       };
-
+      $scope.to_trusted = function(html_code) {
+         var converter = new Showdown.converter();
+          return $sce.trustAsHtml(converter.makeHtml(html_code || ''));
+      };
       $scope.open = function (id) {
         var postSave = $modal.open({
           templateUrl: 'post-save.html',

@@ -12,4 +12,8 @@ angular.module('myapp')
           }]
         }
       })
+      .when('/posts/new', {
+        templateUrl: 'views/post/addpost.html',
+        controller: 'AddPostController'
+      })
     }]);
